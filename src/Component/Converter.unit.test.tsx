@@ -1,30 +1,25 @@
 import {render, screen} from "@testing-library/react";
 import React from "react";
-import Converter from "./Converter";
+import {Provider} from "react-redux";
+import store from "../store";
+import App from "../App";
 
 describe("test suits on component Converter", () => {
-    //expect the title converter to be in the document
     it("should render title", () => {
         render(
-            <Converter/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         );
         const elem = screen.getByText(/Converter/);
         expect(elem).toBeInTheDocument();
     });
 
-    //expect the button in the document
-    it("should render button", () => {
-        render(
-            <Converter/>
-        );
-        const elem = screen.getByRole("button", {name: "Swap Currency"});
-        expect(elem).toBeInTheDocument();
-    });
-
-    //expect initial state of amt should be 0
     it("initial amount should be 0", () => {
         render(
-            <Converter/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         );
         const inputBox1 = screen.getByTestId("fromCcy") as HTMLInputElement;
         const inputBox2 = screen.getByTestId("toCcy") as HTMLInputElement;

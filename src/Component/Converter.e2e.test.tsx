@@ -1,11 +1,15 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import React from "react";
-import Converter from "./Converter";
+import {Provider} from "react-redux";
+import store from "../store";
+import App from "../App";
 
 describe("test AUD/USD rate conversion", () => {
     it("should render correct USD amt with AUD input", () => {
         render(
-            <Converter/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         );
         const fromCcy = screen.getByTestId("fromCcyBox");
         const toCcy = screen.getByTestId("toCcyBox");
